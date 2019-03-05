@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>b.html</title>
+</head>
+
+<body>
+	<h1>b.html</h1>
+  <script type="text/javascript">
+  // 接收domain1的数据
+  window.addEventListener('message', function(e) {
+    console.log('=== data from a.html ===' + e.data);
+
+    let data = JSON.parse(e.data);
+    if (data) {
+      data.msg = '我是来自b.html';
+
+      // 处理后再发回nealyang
+      window.parent.postMessage(JSON.stringify(data), 'http://localhost:8080');
+    }
+  }, false);
+  </script>
+</body>
+
+</html>

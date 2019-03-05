@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>a.html</title>
+</head>
+
+<body>
+  <h1>a.html</h1>
+  <iframe id="iframe" src="b.html" style="display:none;"></iframe>
+  <script type="text/javascript">
+  let iframe = document.getElementById('iframe');
+  iframe.onload = () => {
+    let data = {
+      msg: '我是来自a.html'
+    };
+    // 向b.html传送跨域数据
+    iframe.contentWindow.postMessage(JSON.stringify(data), 'http://localhost:8080');
+  };
+
+  // 接受b.html返回数据
+  window.addEventListener('message', e => {
+    console.log('=== data from b.html ===' + e.data);
+  }, false);
+  </script>
+</body>
+
+</html>
